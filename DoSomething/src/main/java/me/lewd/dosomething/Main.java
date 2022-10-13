@@ -39,7 +39,6 @@ public final class Main extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e) throws InterruptedException {
-        System.out.println(onlinePlayers);
         String prefix = config.getString("prefix") + " ";
         String trigger = config.getString("trigger");
         String word = config.getString("word");
@@ -61,7 +60,7 @@ public final class Main extends JavaPlugin implements Listener {
                 getServer().getScheduler().runTaskLater(this, () -> {
                     onlinePlayers.forEach(p -> getServer().getPlayer(p).setHealth(0.0));
 
-                    onlinePlayers = new ArrayList<>();
+                    onlinePlayers.clear();
                     active = false;
                 }, 20L*seconds);
             });
