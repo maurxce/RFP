@@ -1,0 +1,7 @@
+prefix: "&8[DS]"
+
+trigger: "do something"
+
+message: "&7say {word} or dead. You have {seconds}s"
+word: "ok"
+seconds: 30

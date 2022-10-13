@@ -1,0 +1,6 @@
+name: DoSomething
+version: '${project.version}'
+main: me.lewd.dosomething.Main
+api-version: 1.19
+authors: [ 2lewd4u ]
+description: say ok or ded
