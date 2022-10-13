@@ -1,0 +1,5 @@
+name: RightclickExplosion
+version: '1.0-compiled'
+main: me.lewd.rightclickexplosion.Main
+api-version: 1.19
+authors: [ 2lewd4u ]
