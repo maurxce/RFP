@@ -1,0 +1,8 @@
+# this is the radius in which portals are allowed
+# here you can do a bit of fine-tuning
+allowedRadius: 15
+
+# 15 means the plugin allows portal creation within 15 blocks of the ruined portal structure's root
+# (The root is NOT the center of the structure!)
+
+# Info: anything below 15 may not work correctly!

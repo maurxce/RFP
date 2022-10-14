@@ -1,0 +1,7 @@
+name: RuinedPortals
+version: '1.0'
+main: me.lewd.ruinedportals.Main
+api-version: 1.19
+authors: [ 2lewd4u ]
+description: only allows the ignition of ruined portal structures
+website: https://discord.gg/7eYqtWxZtp
