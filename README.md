@@ -11,3 +11,4 @@ Simply download the jar out of the plugins directory and use it on your server (
 | DamageSound | [MartijnMC](https://www.reddit.com/user/MartijnMC/) |
 | DoSomething | [Dani_fan-nerd](https://www.reddit.com/user/Dani_fan-nerd/) |
 | RightclickExplosion | [r0xANDt0l](https://www.reddit.com/user/r0xANDt0l/) |
+| Poke | [MartijnMC](https://www.reddit.com/user/MartijnMC/) |
