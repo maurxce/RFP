@@ -66,7 +66,7 @@ public final class Main extends JavaPlugin implements Listener {
             });
         }
 
-        if (active && e.getMessage().equalsIgnoreCase("ok")) {
+        if (active && e.getMessage().equalsIgnoreCase(word)) {
             onlinePlayers.remove(e.getPlayer().getName());
         }
     }
