@@ -1,0 +1,7 @@
+name: AntiEnchantLore
+version: '1.0'
+main: me.lewd.antienchantlore.Main
+api-version: 1.19
+authors: [ 2lewd4u ]
+description: This plugin stops the enchantment of items with certain lore
+website: https://discord.gg/7eYqtWxZtp
