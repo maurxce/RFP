@@ -1,6 +1,7 @@
 # RuinedPortals
 
-This plugin only allows players to create nether portals near portal ruins
+This plugin only allows players to create nether portals near portal ruins\
+Also has a config for changing radius
 
 ### Idea
 | Name | Link |
