@@ -12,3 +12,4 @@ Simply download the jar out of the plugins directory and use it on your server (
 | DoSomething | [Dani_fan-nerd](https://www.reddit.com/user/Dani_fan-nerd/) | [1.19.2 - v1.1](https://raw.githubusercontent.com/pxlmo/rfp/main/DoSomething/DoSomething-1.1.jar) |
 | RightclickExplosion | [r0xANDt0l](https://www.reddit.com/user/r0xANDt0l/) | [1.19.2 - v.1.0](https://raw.githubusercontent.com/pxlmo/rfp/main/RightclickExplosion/RightclickExplosion-1.0-compiled.jar) |
 | Poke | [MartijnMC](https://www.reddit.com/user/MartijnMC/) | [1.19.2 - v1.0](https://raw.githubusercontent.com/pxlmo/rfp/main/Poke/Poke-1.0-compiled.jar)
+| RuinedPortals | [panchovilla_](https://www.reddit.com/user/panchovilla_/) | [1.19.2 - v1.0](https://raw.githubusercontent.com/pxlmo/rfp/main/RuinedPortals/RuinedPortals-1.0.jar) |
