@@ -6,7 +6,7 @@
 
     <groupId>me.lewd</groupId>
     <artifactId>DoSomething</artifactId>
-    <version>1.0-compiled</version>
+    <version>1.1</version>
     <packaging>jar</packaging>
 
     <name>DoSomething</name>
