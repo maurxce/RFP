@@ -1,2 +1,6 @@
 me\lewd\poke\Main.class
-me\lewd\poke\Poke.class
+me\lewd\poke\commands\Info.class
+me\lewd\poke\commands\List.class
+me\lewd\poke\listeners\PlayerJoinListener.class
+me\lewd\poke\utils\ChatUtils.class
+me\lewd\poke\commands\Poke.class

@@ -1,0 +1,17 @@
+name: Poke
+version: '1.0-compiled'
+main: me.lewd.poke.Main
+api-version: 1.19
+authors: [ 2lewd4u ]
+description: Facebook pokes but in Minecraft
+
+commands:
+  poke:
+    description: poke someone
+    usage: /<command>
+    permission: pokes.poke
+
+permissions:
+  pokes.poke:
+    description: permission to poke
+    default: true

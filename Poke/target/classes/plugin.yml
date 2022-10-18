@@ -1,5 +1,5 @@
 name: Poke
-version: '1.0-compiled'
+version: '2.0'
 main: me.lewd.poke.Main
 api-version: 1.19
 authors: [ 2lewd4u ]
@@ -10,8 +10,26 @@ commands:
     description: poke someone
     usage: /<command>
     permission: pokes.poke
+  pokes:
+    description: list of pokes
+    usage: /<command>
+    aliases:
+      - pokelist
+    permission: pokes.list
+  info:
+    description: poke info
+    usage: /<command>
+    aliases:
+      - pokeinfo
+    permission: pokes.info
 
 permissions:
   pokes.poke:
     description: permission to poke
+    default: true
+  pokes.list:
+    description: permission to see the poke list gui
+    default: true
+  poke.info:
+    description: permission to poke info command
     default: true

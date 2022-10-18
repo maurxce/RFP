@@ -1,2 +1,6 @@
-D:\IdeaProjects\Poke\src\main\java\me\lewd\poke\Poke.java
 D:\IdeaProjects\Poke\src\main\java\me\lewd\poke\Main.java
+D:\IdeaProjects\Poke\src\main\java\me\lewd\poke\commands\Info.java
+D:\IdeaProjects\Poke\src\main\java\me\lewd\poke\utils\ChatUtils.java
+D:\IdeaProjects\Poke\src\main\java\me\lewd\poke\commands\List.java
+D:\IdeaProjects\Poke\src\main\java\me\lewd\poke\commands\Poke.java
+D:\IdeaProjects\Poke\src\main\java\me\lewd\poke\listeners\PlayerJoinListener.java

@@ -1,60 +1,87 @@
 package me.lewd.poke;
 
-import com.mongodb.*;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
+import me.lewd.poke.commands.Info;
+import me.lewd.poke.commands.List;
+import me.lewd.poke.commands.Poke;
+import me.lewd.poke.listeners.PlayerJoinListener;
+import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.dizitart.no2.*;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 
-public final class Main extends JavaPlugin implements Listener {
+public final class Main extends JavaPlugin {
 
-    public MongoClient client;
-    public MongoDatabase db;
-    public MongoCollection<Document> collection;
     public static Main instance;
+
+    private FileConfiguration conf = new YamlConfiguration();
+    private Nitrite db;
+    private NitriteCollection coll;
 
     @Override
     public void onEnable() {
         instance = this;
 
-        // connect to db
-        client = new MongoClient();
-        db = client.getDatabase("poke");
-        collection = db.getCollection("pokes");
+        initializeFiles();
+        initializeDatabase();
 
-        getCommand("poke").setExecutor(new Poke());
-        getServer().getPluginManager().registerEvents(this, this);
+        registerCommands();
+        registerEvents();
     }
 
-    @EventHandler
-    public void onJoin(PlayerJoinEvent e) {
-        Player player = e.getPlayer();
-        BasicDBObject query = new BasicDBObject();
-        query.put("target", player.getName());
+    private void initializeFiles() {
+        File dataDir = new File(getDataFolder(), "data");
+        InputStreamReader confFile = new InputStreamReader(getClassLoader().getResourceAsStream("conf.yml"));
 
-        FindIterable<Document> cursor = collection.find(query);
-        for (Document doc : cursor) {
-            String sender = doc.getString("sender");
-            player.sendMessage(sender + " poked you!");
+        if (!getDataFolder().exists()) getDataFolder().mkdirs();
+        if (!dataDir.exists()) dataDir.mkdirs();
 
-            // delete entry
-            Document filter = new Document();
-            filter.append("sender", sender);
-            filter.append("target", player.getName());
-
-            collection.deleteOne(filter);
+        try {
+            conf.load(confFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
         }
     }
+
+    private void initializeDatabase() {
+        db = Nitrite.builder()
+                .filePath(getDataFolder().getAbsolutePath() + "/data/pokes.db")
+                .openOrCreate();
+
+        coll = db.getCollection("pokes");
+    }
+
+    private void registerCommands() {
+        getCommand("poke").setExecutor(new Poke());
+        getCommand("pokes").setExecutor(new List());
+        getCommand("info").setExecutor(new Info());
+    }
+
+    private void registerEvents() {
+        getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
+    }
+
+    public FileConfiguration getDevConf() { return conf; }
+    public Nitrite getDatabase() { return db; }
+
+    public String getAuthor() { return getDescription().getAuthors().get(0); }
+    public String getVersion() { return getDescription().getVersion(); }
 
     @Override
     public void onDisable() {
         instance = null;
+
+        closeDatabase();
+    }
+
+    private void closeDatabase() {
+        if (db.hasUnsavedChanges()) db.commit();
+        if (!db.isClosed()) db.close();
     }
 }
 
