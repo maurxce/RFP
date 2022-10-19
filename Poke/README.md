@@ -1,12 +1,6 @@
 # Poke
 The old Facebook poking, but in Minecraft
 
-### New in v2
-```
-  - moved from MongoDB to an embedded solution (Nitrite)
-  - PokeGUI
-```
-
 ### Idea
 | Name | Link |
 | --- | --- |
