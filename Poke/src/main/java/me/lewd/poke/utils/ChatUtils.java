@@ -7,7 +7,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 public class ChatUtils {
 
-    FileConfiguration conf = Main.instance.getDevConf();
+    private FileConfiguration conf = Main.instance.getDevConf();
     private String primary = conf.getString("colors.primary");
     private String secondary = conf.getString("colors.secondary");
     private MiniMessage mm = MiniMessage.miniMessage();

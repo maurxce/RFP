@@ -16,9 +16,10 @@ import org.dizitart.no2.filters.Filters;
 
 public class PlayerJoinListener implements Listener {
 
-    ChatUtils chatUtils = new ChatUtils();
-    FileConfiguration conf = Main.instance.getDevConf();
-    private NitriteCollection coll = Main.instance.getDatabase().getCollection("pokes");
+    private ChatUtils chatUtils = new ChatUtils();
+    private FileConfiguration config = Main.instance.getConfig();
+    private FileConfiguration conf = Main.instance.getDevConf();
+    private NitriteCollection pokesCollection = Main.instance.getDatabase().getPokesCollection();
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
@@ -26,22 +27,27 @@ public class PlayerJoinListener implements Listener {
         Audience audience = (Audience) player;
 
         Filter filter = Filters.eq("target", player.getName());
-        int pokeAmount = coll.find(filter).size();
+        int pokeAmount = pokesCollection.find(filter).size();
         if (pokeAmount <= 0 ) return;
 
-        String primary = conf.getString("colors.primary");
-        String secondary = conf.getString("colors.secondary");
+        Component message = chatUtils.deserialize(formatJoinMessage(pokeAmount));
 
-        Component message = chatUtils.deserialize(
-                chatUtils.getPrefixUnserialized()
-                        + String.format("<%s>You have been poked <%s>", secondary, primary)
-                        + pokeAmount + String.format(" <%s>time(s) while you were gone", secondary)
-        );
         Component response = Component.text()
+                .append(chatUtils.getPrefixComponent())
                 .append(message)
                 .clickEvent(ClickEvent.runCommand("/pokes"))
                 .build();
 
         audience.sendMessage(response);
+    }
+
+    private String formatJoinMessage(int amount) {
+        String primary = conf.getString("colors.primary");
+        String secondary = conf.getString("colors.secondary");
+
+        String message = config.getString("messages.onJoin")
+                .replace("{amount}", String.format("<%s>%d</%s>", primary, amount, primary));
+
+        return String.format("<%s>%s", secondary, message);
     }
 }

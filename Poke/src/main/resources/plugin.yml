@@ -9,6 +9,8 @@ commands:
   poke:
     description: poke someone
     usage: /<command>
+    aliases:
+      - ping
     permission: pokes.poke
   pokes:
     description: list of pokes

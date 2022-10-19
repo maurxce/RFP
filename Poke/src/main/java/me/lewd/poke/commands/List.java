@@ -18,10 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerProfile;
 import org.bukkit.profile.PlayerTextures;
-import org.dizitart.no2.Cursor;
-import org.dizitart.no2.Document;
-import org.dizitart.no2.Filter;
-import org.dizitart.no2.NitriteCollection;
+import org.dizitart.no2.*;
 import org.dizitart.no2.filters.Filters;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,8 +29,8 @@ import java.util.UUID;
 
 public class List implements CommandExecutor {
 
-    FileConfiguration conf = Main.instance.getDevConf();
-    private NitriteCollection coll = Main.instance.getDatabase().getCollection("pokes");
+    private FileConfiguration conf = Main.instance.getDevConf();
+    private NitriteCollection pokesCollection = Main.instance.getDatabase().getPokesCollection();
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -56,7 +53,7 @@ public class List implements CommandExecutor {
 
         // pokes
         Filter filter = Filters.eq("target", player.getName());
-        Cursor cursor = coll.find(filter);
+        Cursor cursor = pokesCollection.find(filter);
 
         for (Document doc : cursor) {
             Object pokeSender = doc.get("sender");
@@ -73,7 +70,7 @@ public class List implements CommandExecutor {
         gui.setItem(53, getCheckmarkSkull());
 
         gui.addSlotAction(53, event -> {
-            coll.remove(filter);
+            pokesCollection.remove(filter);
             gui.close(player);
         });
 

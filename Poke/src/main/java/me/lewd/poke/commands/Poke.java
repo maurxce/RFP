@@ -5,6 +5,7 @@ import me.lewd.poke.utils.ChatUtils;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,9 +19,11 @@ import org.dizitart.no2.filters.Filters;
 
 public class Poke implements CommandExecutor {
 
-    ChatUtils chatUtils = new ChatUtils();
-    FileConfiguration conf = Main.instance.getDevConf();
-    private NitriteCollection coll = Main.instance.getDatabase().getCollection("pokes");
+    private ChatUtils chatUtils = new ChatUtils();
+    private FileConfiguration config = Main.instance.getConfig();
+    private FileConfiguration conf = Main.instance.getDevConf();
+    private NitriteCollection pokesCollection = Main.instance.getDatabase().getPokesCollection();
+    private NitriteCollection pokeAmountCollection = Main.instance.getDatabase().getUserPokeAmountCollection();
 
     @Override
     public boolean onCommand(CommandSender cmdSender, Command command, String label, String[] args) {
@@ -37,26 +40,47 @@ public class Poke implements CommandExecutor {
         if (target == sender) return true;
 
         if (target != null && target.isOnline()) {
-            String primary = conf.getString("colors.primary");
-            String secondary = conf.getString("colors.secondary");
+           Component message = chatUtils.deserialize(formatPokeMessage(senderName));
 
-            Component message = chatUtils.deserialize(
-                    chatUtils.getPrefixUnserialized()
-                            + String.format("<%s>%s <%s>poked you!", primary, senderName, secondary)
-            );
-            audience.sendMessage(message);
+           Component response = Component.text()
+                   .append(chatUtils.getPrefixComponent())
+                   .append(message).build();
+
+           audience.sendMessage(response);
+            target.playSound(target.getLocation(), getSound(), 1f, 1f);
             return true;
         }
 
+        updateCollection(senderName, targetName);
+        return true;
+    }
+
+    private String formatPokeMessage(String senderName) {
+        String primary = conf.getString("colors.primary");
+        String secondary = conf.getString("colors.secondary");
+
+        String message = config.getString("messages.onPoke")
+                .replace("{player}", String.format("<%s>%s</%s>", primary, senderName, primary));
+
+        return String.format("<%s>%s", secondary, message);
+    }
+
+    private Sound getSound() {
+        String sound = config.getString("pokeSound");
+
+        if (sound.isEmpty()) sound = "ENTITY_EXPERIENCE_ORB_PICKUP";
+        return Sound.valueOf(sound);
+    }
+
+    private void updateCollection(String sender, String target) {
         Filter filter = Filters.and(
-                Filters.eq("sender", senderName),
-                Filters.eq("target", targetName)
+                Filters.eq("sender", sender),
+                Filters.eq("target", target)
         );
-        Document doc = Document.createDocument("sender", senderName)
-                .put("target", targetName);
+        Document doc = Document.createDocument("sender", sender)
+                .put("target", target);
         UpdateOptions options = UpdateOptions.updateOptions(true);
 
-        coll.update(filter, doc, options);
-        return true;
+        pokesCollection.update(filter, doc, options);
     }
 }

@@ -1,0 +1,17 @@
+#   Poke
+#
+#   [Discord] https://discord.gg/7eYqtWxZtp
+#   [GitHub] https://github.com/pxlmo/rfp
+#   [Documentation] --coming soon--
+
+# changing will reset poke data
+database:
+  username: "pokes"
+  password: "default"
+
+# https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html
+pokeSound: "ENTITY_EXPERIENCE_ORB_PICKUP"
+
+messages:
+  onJoin: "You have been poked {amount} time(s) while you were gone"
+  onPoke: "{player} poked you!"

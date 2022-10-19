@@ -7,3 +7,13 @@ colors:
 socials:
   discord: "https://discord.gg/7eYqtWxZtp/"
   github: "https://github.com/pxlmo/rfp/tree/main/Poke/"
+
+
+
+# default values
+
+pokeSound: "ENTITY_EXPERIENCE_ORB_PICKUP"
+
+messages:
+  onJoin: "You have been poked {amount} time(s) while you were gone"
+  onPoke: "{player} poked you!"

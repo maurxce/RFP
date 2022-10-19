@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class Info implements CommandExecutor {
 
-    FileConfiguration conf = Main.instance.getDevConf();
+    private FileConfiguration conf = Main.instance.getDevConf();
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
