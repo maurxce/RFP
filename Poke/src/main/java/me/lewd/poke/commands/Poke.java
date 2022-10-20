@@ -33,6 +33,8 @@ public class Poke implements CommandExecutor {
         String senderName = cmdSender.getName();
         Player sender = (Player) cmdSender;
 
+        if (!sender.hasPermission("poke.poke")) return true;
+
         String targetName = args[0];
         Player target = Bukkit.getPlayer(targetName);
         Audience audience = (Audience) target;

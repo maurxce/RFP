@@ -4,12 +4,10 @@
 #   [GitHub] https://github.com/pxlmo/rfp
 #   [Documentation] --coming soon--
 
-# changing will reset poke data
 database:
   username: "pokes"
   password: "default"
 
-# https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html
 pokeSound: "ENTITY_EXPERIENCE_ORB_PICKUP"
 
 messages:

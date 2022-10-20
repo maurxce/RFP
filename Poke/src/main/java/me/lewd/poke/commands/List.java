@@ -37,6 +37,8 @@ public class List implements CommandExecutor {
         if (!(sender instanceof Player)) return true;
         Player player = (Player) sender;
 
+        if (!player.hasPermission("poke.list")) return true;
+
         String secondary = conf.getString("colors.secondary");
 
         MiniMessage mm = MiniMessage.miniMessage();

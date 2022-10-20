@@ -21,6 +21,8 @@ public class Info implements CommandExecutor {
         if (!(sender instanceof Player)) return true;
         Audience audience = (Audience) sender;
 
+        if (!sender.hasPermission("poke.info")) return true;
+
         String primary = conf.getString("colors.primary");
         String secondary = conf.getString("colors.secondary");
         String author = Main.instance.getAuthor();

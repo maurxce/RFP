@@ -11,25 +11,25 @@ commands:
     usage: /<command>
     aliases:
       - ping
-    permission: pokes.poke
+    permission: poke.poke
   pokes:
     description: list of pokes
     usage: /<command>
     aliases:
       - pokelist
-    permission: pokes.list
+    permission: poke.list
   info:
     description: poke info
     usage: /<command>
     aliases:
       - pokeinfo
-    permission: pokes.info
+    permission: poke.info
 
 permissions:
-  pokes.poke:
+  poke.poke:
     description: permission to poke
     default: true
-  pokes.list:
+  poke.list:
     description: permission to see the poke list gui
     default: true
   poke.info:
